@@ -1,26 +1,23 @@
 const express = require('express');
-const externalModule = require('./logger');
+const logger = require('../logger/logger.js');
+
+const helper = require('../Util/helper.js');
+const formatter = require('../Validator/formatter');
 
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
-    console.log('the constant in logeer file has balue '+ externalModule.url);
-    console.log("the current batch is "+ externalModule.cohort)
-    externalModule.log()
-    res.send('My first ever api!')
-});
+router.get('/test-me', function(req, res){
+    logger.welcome("Disha");
+    helper.printDate();
+    helper.printMonth();
+    helper.getBatchInfo();
+    formatter.trim();
+    formatter.lowerCase();
+    formatter.upperCase();
 
-router.get('/test-me1', function (req, res) {
-    res.send('My first  ever api! with self trying ')
-});
+    res.send("Api wors successfully, Check your terminal")
+})
 
-router.get('/test-me2', function (req, res) {
-    res.send('My first ever api! with self trying on second time ind im really enthuciastic to see the result')
-});
-
-router.get('/test-me3', function (req, res) {
-    res.send('My first ever api! im happy to for the result')
-});
 
 
 module.exports = router;
