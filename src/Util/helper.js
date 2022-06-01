@@ -12,7 +12,7 @@ const printMonth =()=>{
 module.exports.printMonth = printMonth;
 
 const getBatchInfo = () =>{
-    console.log(`Radon, W3_D1, the topic for for today is Nodejs Module System, NPM, istall some package, some git commands to stash, git fetch etc. \n`);
+    console.log(`Radon, W3_D3, the topic for for today is Nodejs Module System, NPM, istall some package, some git commands to stash, git fetch etc. \n`);
 }
 
 module.exports.getBatchInfo = getBatchInfo

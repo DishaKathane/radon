@@ -15,7 +15,7 @@ router.get('/test-me', function(req, res){
     formatter.lowerCase();
     formatter.upperCase();
 
-    res.send("Api wors successfully, Check your terminal")
+    res.send("Api works successfully, Check your terminal")
 })
 
 

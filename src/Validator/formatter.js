@@ -7,14 +7,14 @@ module.exports.trim =trim;
 
 
 const lowerCase = function(){
-    console.log(`the string in lowercase is:- ${string.toLocaleLowerCase()} \n `)
+    console.log(`the string in lowercase is:- ${string.toLowerCase()} \n `)
 };
 
 module.exports.lowerCase = lowerCase;
 
 
 const upperCase = function(){
-    console.log(`the string in lowercase is:- ${string.toUpperCase()} \n `)
+    console.log(`the string in uppercase is:- ${string.toUpperCase()} \n `)
 };
 
 module.exports.upperCase = upperCase;
