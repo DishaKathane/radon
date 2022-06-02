@@ -4,6 +4,19 @@ const underscore = require('underscore')
 
 const router = express.Router();
 
+router.get('/movies', function (req, res) {
+    let arrMovies = ['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins'];
+   console.log("program runs successfully");
+    res.send(arrMovies);
+});
+
+router.get('/movies/:indexNumber', function (req, res) {
+    let arrIndex = ['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins'];
+    res.send('Hello there!')
+});
+
+
+
 router.get('/test-me', function (req, res) {
     myHelper.printDate()
     myHelper.getCurrentMonth()
