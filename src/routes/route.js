@@ -1,40 +1,36 @@
 const express = require('express');
-const myHelper = require('../util/helper')
-const underscore = require('underscore')
+
 
 const router = express.Router();
+//Write an api which gives the missing number in an array of integer starting from 1.... . eg- [1,2,3,5,6,7]: 4 is missing
 
-router.get('/test-me', function (req, res) {
-    myHelper.printDate()
-    myHelper.getCurrentMonth()
-    myHelper.getCohortData()
-    let firstElement = underscore.first(['Sabiha','Akash','Pritesh'])
-    console.log('The first element received from underscope function is '+firstElement)
-    res.send('My first ever api!')
-});
-
-router.get('/hello', function (req, res) {
+router.get('/missingNo', function (req, res) {
+    let arr =[1,2,3,5,6,7]
+    let sum = 0 ;
+    for(let i in arr){
+        sum += arr[i];
+    }
+    let Lastdig = arr.pop();
+    let consicutativeSum = Lastdig *(Lastdig + 1)/2;
+    let missingNo =consicutativeSum -sum;
    
-    res.send('Hello there!')
+    res.send({ missingNo});
 });
 
-router.get('/candidates', function(req, res){
-    console.log('Query paramters for this request are '+JSON.stringify(req.query))
-    let gender = req.query.gender
-    let state = req.query.state
-    let district = req.query.district
-    console.log('State is '+state)
-    console.log('Gender is '+gender)
-    console.log('District is '+district)
-    let candidates = ['Akash','Suman']
-    res.send(candidates)
-})
-
-router.get('/candidates/:canidatesName', function(req, res){
-    console.log('The request objects is '+ JSON.stringify(req.params))
-    console.log('Candidates name is '+req.params.canidatesName)
-    res.send('Done')
-})
+router.get('/missingNo1', function (req, res) {
+    let arr =[33,34,35,37,38];
+    let len =arr.length;
+    let sum = 0 ;
+    for(let i in arr){
+        sum += arr[i];
+    }
+    firstDig = arr[0];
+    let Lastdig = arr.pop();
+    let consicutativeSum = (len +1) *(Lastdig + firstDig)/2;
+    let missingNo =consicutativeSum -sum;
+   
+    res.send({ missingNo});
+});
 
 
 module.exports = router;
