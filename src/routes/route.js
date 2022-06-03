@@ -17,17 +17,17 @@ router.get("/test-api" , function(req, res) {
 })
 
 
-router.get("/test-api-2" , function(req, res) {
+router.get("/test-api2" , function(req, res) {
     res.send("hi FunctionUp. This is another cool API")
 })
 
 
-router.get("/test-api-3" , function(req, res) {
+router.get("/test-api3" , function(req, res) {
     res.send("hi FunctionUp. This is another cool API. And NOw i am bored of creating API's ")
 })
 
 
-router.get("/test-api-4" , function(req, res) {
+router.get("/test-api4" , function(req, res) {
     res.send("hi FunctionUp. This is another cool API. And NOw i am bored of creating API's. PLZ STOP CREATING MORE API;s ")
 })
 
