@@ -1,6 +1,4 @@
 const express = require('express');
-const myHelper = require('../util/helper')
-const underscore = require('underscore')
 
 const router = express.Router();
 
@@ -70,10 +68,11 @@ router.get('/film/:filmId', function (req, res) {
         }]
 
         let filmIndex =req.params.filmId;
-        if(filmIndex<movieObj.length){
-            res.send(movieObj[filmIndex])
-        }else{
+        if(filmIndex > movieObj.length || filmIndex ===0){
             res.send({Result : "No movie exists with this id"})
+
+        }else{
+            res.send(movieObj[filmIndex-1])
         }
         
      
