@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bookSchema = new mongoose.Schema( {
     bookName: String, 
     authorName: String, 
-    tags: [String],
+    tags:[String],
     
     isPublished: Boolean,
     prices: {
@@ -14,13 +14,14 @@ const bookSchema = new mongoose.Schema( {
 }, { timestamps: true });
 
 
-module.exports = mongoose.model('Book', bookSchema) //users
+module.exports = mongoose.model('Bookk', bookSchema) //users
 
 //Validation:
 //require:true
 //unique
 // default
 
+//type in mongoose
 //String
 //Number
 //Date
