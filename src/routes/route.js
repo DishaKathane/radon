@@ -18,4 +18,8 @@ router.put("/findAuthor", BookController.findAuthor)
 
 router.get("/findBookWithAuthor", BookController.findBookWithAuthor)
 
+router.get("/bookByAuthorid/:author_id", BookController.booksbBy_authorid)
+
+router.get("/authorsName",BookController.authorsName)
+
 module.exports = router;

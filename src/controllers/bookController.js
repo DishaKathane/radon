@@ -1,6 +1,7 @@
 const { count } = require("console")
 const BookModel= require("../models/bookModel")
 const authorModel= require("../models/authorModel")
+const bookModel = require("../models/bookModel")
 
 
 
@@ -55,13 +56,42 @@ let findBookWithAuthor = async function (req, res) {
 res.send({msg: authorname})
 }
 
+let booksbBy_authorid =  async function (req, res) {
+    let id= req.params.author_id
+
+let savedData= await BookModel.find({author_id:id}).select({name:1, author_id:1})
+    console.log(savedData)
+    res.send({msg: savedData})
+    
+  }
+
+    
 
 
+let authorsName= async function(req, res){
 
-module.exports.createBook= createBook
+    let result = await authorModel.find({age:{$gt:50}}).select({author_name:1,author_id:1,age:1, _id:0})
+      let authArr= result.map(obj=>obj.author_id)
+    // console.log(result)
+    let bookResult = await BookModel.find({$and:[{author_id:{$in:authArr}},{ratings:{$gt:4}}] })
+    bookResult =bookResult.map(obj=>obj.author_id)
+    result=await authorModel.find({author_id:{$in:bookResult}}).select({author_name:1, age:1,_id:0})
+    res.send({msg:result})
+}
+
+// let getNameAge=async(req,res)=>{
+//     let data=await authorModel.find({age:{$gt:50}}).select({ author_id:1,author_name:1,age:1,_id:0})
+//     let autIdArr=data.map((obj)=>obj.author_id)
+//     let bookdata=await BookModel.find({$and:[{author_id:{$in:autIdArr}},{ratings:{$gt:4}}]})
+//     bookdata=bookdata.map((obj)=>obj.author_id)
+//     data=await AuthorModel.find({author_id:{$in:bookdata}}).select({author_name:1,age:1,_id:0})
+//     res.send({msg:data})
+// }
+
+module.exports.createBook= createBook;
 module.exports.getBooksData= getBooksData
 module.exports.findAuthor = findAuthor
 module.exports.findBookWithAuthor=findBookWithAuthor
 
-
-  
+module.exports.booksbBy_authorid =booksbBy_authorid
+module.exports.authorsName= authorsName
