@@ -1,47 +1,32 @@
 const UserModel= require("../models/userModel")
 
-
-
-
-const basicCode= async function(req, res, next) {
-    let tokenDataInHeaders= req.headers.token
-    console.log(tokenDataInHeaders)
-
-    console.log( "HEADER DATA ABOVE")
-    console.log( "hey man, congrats you have reached the Handler")
-    //res.send({ msg: "This is coming from controller (handler)"})
-    next()
-    }
-
-const createUser= async function (req, res) {
+const createUser= async function(req, res) {
+      let body = req.body
     
-    let data= req.body
-    let tokenDataInHeaders= req.headers.token
-    //Get all headers from request
-    console.log("Request headers before modificatiom",req.headers)
-    //Get a header from request
-    console.log(req.headers.batch)
-    console.log(req.headers["content-type"])
-    console.log(tokenDataInHeaders)
-    //Set a header in request
-    req.headers['month']='June' //req.headers.month = "June"
+let saveData = await UserModel.create(body)
+      res.send({msg : saveData})   
 
-    //Set an attribute in request object
-    req.anything = "everything"
-    
-    
-    console.log("Request headers after modificatiom",req.headers)
-    
-    //Set a header in response
-    res.header('year','2022')
-    res.send({msg: "Hi"})
+        
+        }
+module.exports.createUser = createUser
+
+
+
+
+const createUser1= async function(req, res) {
+      let header = req.headers
+let appType = header["isFreeAppUser"] 
+ if(!appType)  appType = header["isfreeappuser"];
+
+if(!appType){
+
+ res.send({msg: " the request is missing a mandatory header"})  
 }
+      let body = req.body
+    
+let saveData = await UserModel.create(body)
+      res.send({msg : saveData})    
+        
+        }
+module.exports.createUser1 = createUser1
 
-const getUsersData= async function (req, res) {
-    let allUsers= await UserModel.find()
-    res.send({msg: allUsers})
-}
-
-module.exports.createUser= createUser
-module.exports.getUsersData= getUsersData
-module.exports.basicCode= basicCode
