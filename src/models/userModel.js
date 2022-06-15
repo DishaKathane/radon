@@ -8,14 +8,20 @@ const userSchema = new mongoose.Schema( {
 
         required: true
     },
-    emailId: String,
+    emailId:String,
     password: String,
     gender: {
         type: String,
         enum: ["male", "female", "other"]
     },
     age: Number,
-    posts: {type: [], deafult: []}
+    isDeleted:{
+        type:Boolean,
+        default:false
+    },
+    posts: {type: [], default: []}
+
 }, { timestamps: true });
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('User15june', userSchema);
+
