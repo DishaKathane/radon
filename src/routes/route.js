@@ -8,7 +8,6 @@ router.post("/users", userController.createUser  );
 router.post("/login",userController.loginUser);
 
 router.get("/users/:userId",middleware.authenticate,middleware.authorise,userController.getUserData);
-
 router.put("/users/:userId",middleware.authenticate,middleware.authorise, userController.updateUser)
 
 router.delete("/users/:userId",middleware.authenticate,middleware.authorise,  userController.deleteUser);

@@ -1,31 +1,35 @@
 
 let jwt =require("jsonwebtoken")
-let userModel = require("../models/userModel")
 
 const authenticate = async function(req,res,next){
 
-    let token = req.headers["x-Auth-token"];
-  if (!token) token = req.headers["x-auth-token"];
+    let token = req.headers["x-Auth-token"] || req.headers["x-auth-token"];
 
-  //If no token is present in the request header return error
   if (!token) return res.send({ status: false, msg: "token must be present" });
 
-  console.log(token);
+  // console.log(token);
+
+  jwt.verify(token,"functionup-radon",function (err, data) {
+
+    if(err) return res.send({ status: false, message: err.message})
+   } )
+        next()
+    }
+
   
-  let decodedToken = jwt.verify(token, "functionup-radon");
-  if (!decodedToken)
-    return res.send({ status: false, msg: "incorrect token"});
-
-    next();
-}
+  // let decodedToken = jwt.verify(token, "functionup-radon")
+  // if (!decodedToken)
+  //   return res.send({ status: false, msg: "incorrect token"});
+  
+//     next();
+// }
 module.exports.authenticate =authenticate
-
 
 
 const authorise = function(req, res, next) {
 
-    let token = req.headers["x-Auth-token"];
-    if (!token) token = req.headers["x-auth-token"]
+    let token = req.headers["x-Auth-token"] || req.headers["x-auth-token"]
+    // if (!token) token = req.headers["x-auth-token"]
     
     let decodedToken = jwt.verify(token, "functionup-radon");
     
