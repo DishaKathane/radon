@@ -67,17 +67,17 @@ module.exports.updateUser = updateUser;
 
 const deleteUser = async function (req, res) {
     
-    let token = req.headers["x-Auth-token"];
-    if (!token) token = req.headers["x-auth-token"];
+    // let token = req.headers["x-Auth-token"];
+    // if (!token) token = req.headers["x-auth-token"];
   
-    //If no token is present in the request header return error
-    if (!token) return res.send({ status: false, msg: "token must be present" });
+    // //If no token is present in the request header return error
+    // if (!token) return res.send({ status: false, msg: "token must be present" });
   
-    console.log(token);
+    // console.log(token);
     
-    let decodedToken = jwt.verify(token, "functionup-radon");
-    if (!decodedToken)
-      return res.send({ status: false, msg: error});
+    // let decodedToken = jwt.verify(token, "functionup-radon");
+    // if (!decodedToken)
+    //   return res.send({ status: false, msg: error});
       let userId = req.params.userId;
       let user = await userModel.findById(userId);
       //Return an error if no user with the given id exists in the db

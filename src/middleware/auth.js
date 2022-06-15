@@ -13,8 +13,8 @@ const mid1 = async function(req,res,next){
   console.log(token);
   
   let decodedToken = jwt.verify(token, "functionup-radon");
-  if (!decodedToken)
-    return res.send({ status: false, msg: error});
+  // if (!decodedToken)
+  //   return res.send({ status: false, msg: "incorrect token"});
 
     next();
 }
