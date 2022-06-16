@@ -2,10 +2,18 @@ const { count } = require("console")
 const BookModel = require("../models/bookModel")
 
 const createBook= async function (req, res) {
+try{    
     let data= req.body
-
-    let savedData= await BookModel.create(data)
-    res.send({msg: savedData})
+     if(Object.keys(data).length !=0){
+let savedData= await BookModel.create(data)
+ res.status(201).send({msg: savedData}); 
+     }
+     else res.status(400).send({msg:"bad request"})
+   
+}catch(err){
+    console.log({msg:"err", error:err.message})
+    res.send(500).send({msg:"err", error:err.message})
+}
 }
 
 
