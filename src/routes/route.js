@@ -4,9 +4,8 @@ const userController= require("../controllers/userController")
 const middleware  = require("../middleware/auth")
 
 
-router.post("/users", userController.createUser  );
 router.post("/login",userController.loginUser);
-
+router.post("/users",userController.createUser)
 router.get("/users/:userId",middleware.authenticate,middleware.authorise,userController.getUserData);
 router.put("/users/:userId",middleware.authenticate,middleware.authorise, userController.updateUser)
 
