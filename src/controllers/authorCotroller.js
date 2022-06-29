@@ -64,7 +64,7 @@ const createAuthor = async function (req, res) {
 
         if (!password)
             return res.status(400).send({ status: false, msg: "password is required...!" })
-        if (typeof password !== "string" || password.trim().length === 0) return res.status(400).send({ status: false, msg: "last name should be string and should not contain spaces" })
+        if (typeof password !== "string" || password.trim().length === 0) return res.status(400).send({ status: false, msg: "last password should be string and should not contain spaces" })
         if (password.length < 8) {
             return res.status(400).send({ status: false, msg: "enter password with Minimum length 8" })
         }
