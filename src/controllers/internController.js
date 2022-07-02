@@ -18,7 +18,7 @@ let createIntern = async function (req, res) {
         let checkEmail = await internModel.findOne({ email: email })
         if (checkEmail)  return res.status(400).send({ status: false, message: `email: ${email} already exist...` }) 
 
-        if (!validator.valid(mobile) || !validator.moblieRegex(mobile)) return res.status(400).send({ status: false, message: "please provide the mobile number inn valid format..." }) 
+        if (!validator.valid(mobile) || !validator.moblieRegex(mobile)) return res.status(400).send({ status: false, message: "please provide the mobile number in a valid format..." }) 
 
         let checkMobile = await internModel.findOne({ mobile: mobile })
         if (checkMobile)  return res.status(400).send({ status: false, message: `mobile no.: ${mobile} is already present...` })
