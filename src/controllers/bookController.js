@@ -41,35 +41,23 @@ let uploadFile= async ( file) =>{
    })
 }
 
-let bookCover=async  function(req, res){
-
-    try{
-        let files= req.files
-        if(files && files.length>0){
-            //upload to s3 and get the uploaded link
-            // res.send the link back to frontend/postman
-            let uploadedFileURL= await uploadFile( files[0] )
-            res.status(201).send({msg: "file uploaded succesfully", data: uploadedFileURL})
-        }
-        else{
-            res.status(400).send({ msg: "No file found" })
-        }
-        
-    }
-    catch(err){
-        res.status(500).send({msg: err})
-    }
-    
-}
-
 
 
 //-----------------------------------------create Book Api---------------------------------------------------------
 const createBook = async function (req, res) {
     try {
         let requestBody = req.body
-        // console.log(requestBody)
+        console.log(requestBody)
+        let files = req.files
+        if (files && files.length > 0) {
 
+            let uploadedFileURL = await uploadFile(files[0])
+
+            requestBody.bookCover = uploadedFileURL
+
+        } else {
+            res.status(400).send({ msg: "No file found" });
+        }
        
         let validUserId = req.decodedToken.userId
         let { title, excerpt, ISBN, category, reviews, subcategory, releasedAt, userId, isDeleted, bookCover} = requestBody;
@@ -88,9 +76,9 @@ const createBook = async function (req, res) {
 
         //userId
         if (!validator.valid(userId)) return res.status(400).send({ status: false, message: "UserId is required...!" })
-        if (req.body.hasOwnProperty('userId')) {
-            if (!validator.isValidObjectId(userId)) return res.status(400).send({ status: false, message: "please enter the valid UserId...!" })
-         }
+        // if (req.body.hasOwnProperty('userId')) {
+        //     if (!validator.isValidObjectId(userId)) return res.status(400).send({ status: false, message: "please enter the valid UserId...!" })
+        //  }
         let checkUser = await userModel.findById(userId);
         if (!checkUser) return res.status(404).send({ status: false, message: "author is not found" });
         if (requestBody.userId != validUserId) return res.status(403).send({ status: false, message: "Error, authorization failed" });
@@ -279,4 +267,4 @@ const deleteBookByParam = async function (req, res) {
 
 }
 
-module.exports = { createBook, getBooks, deleteBookByParam, updateBookByParam, getBooksById,bookCover }
+module.exports = { createBook, getBooks, deleteBookByParam, updateBookByParam, getBooksById}//,bookCover 

@@ -14,8 +14,8 @@ const createReview = async function (req, res) {
         if (!validator.isValidObjectId(bookId)) return res.status(400).send({ status: false, message: "Please,enter valid bookId....!" })
 
         //bookId
-        let checkBook = await bookModel.findOne({ _id: bookId });
-        if (checkBook.isDeleted == true) return res.status(400).send({ status: false, message: "Book is deleted...!" })
+        const checkBook = await bookModel.findOne({ _id: bookId,isDeleted:false });
+        if (!checkBook) return res.status(404).send({ status: false, message: "Book not found...!" })
   
         //reviewBy
         if (!validator.regexSpaceChar(reviewedBy)) return res.status(400).send({ status: false, message: "reviewedBy name is not valid format...!" });
@@ -35,11 +35,16 @@ const createReview = async function (req, res) {
 
         let saveReview = await reviewModel.create(reviewedData)
         let obj = saveReview.toObject();
+        
         delete obj.isDeleted;
         delete obj.__v;
+        
+        let bookData = checkBook.toObject();
+        bookData["ReviewsData"] = obj;
 
-        await bookModel.findOneAndUpdate({ _id: bookId, isDeleted: false }, { $inc: { reviews: 1 } })
-        return res.status(201).send({ status: true, message: "Review given successfully", data: obj })
+
+        await bookModel.findOneAndUpdate({ _id: bookId, isDeleted: false }, { $inc: { reviews: 1 } });
+        return res.status(201).send({ status: true, message: "Review given successfully", data: bookData })
 
     }
     catch (err) {
